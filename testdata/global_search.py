@@ -1,4 +1,5 @@
 import os
+import asyncio
 from pathlib import Path
 import pandas as pd
 import tiktoken
@@ -63,7 +64,6 @@ print(
 
 report_df.head()
 
-
 # Build global context based on community reports 基于社区报告构建全球背景
 context_builder = GlobalCommunityContext(
     community_reports=reports,
@@ -74,7 +74,8 @@ context_builder = GlobalCommunityContext(
 
 # Perform global search  执行全局搜索
 context_builder_params = {
-    "use_community_summary": False,  # False means using full community reports. True means using community short summaries.
+    "use_community_summary": False,  # False means using full community reports. True means using community short
+    # summaries.
     "shuffle_data": True,
     "include_community_rank": True,
     "min_community_rank": 0,
@@ -82,7 +83,8 @@ context_builder_params = {
     "include_community_weight": True,
     "community_weight_name": "occurrence weight",
     "normalize_community_weight": True,
-    "max_tokens": 8000,  # change this based on the token limit you have on your model (if you are using a model with 8k limit, a good setting could be 5000)
+    "max_tokens": 8000,  # change this based on the token limit you have on your model (if you are using a model with
+    # 8k limit, a good setting could be 5000)
     "context_name": "Reports",
 }
 
@@ -93,7 +95,8 @@ map_llm_params = {
 }
 
 reduce_llm_params = {
-    "max_tokens": 1500,  # change this based on the token limit you have on your model (if you are using a model with 8k limit, a good setting could be 1000-1500)
+    "max_tokens": 1500,  # change this based on the token limit you have on your model (if you are using a model with
+    # 8k limit, a good setting could be 1000-1500)
     "temperature": 0.0,
 }
 
@@ -101,21 +104,25 @@ search_engine = GlobalSearch(
     model=model,
     context_builder=context_builder,
     tokenizer=tokenizer,
-    max_data_tokens=8000,  # change this based on the token limit you have on your model (if you are using a model with 8k limit, a good setting could be 5000)
+    max_data_tokens=8000,  # change this based on the token limit you have on your model (if you are using a model
+    # with 8k limit, a good setting could be 5000)
     map_llm_params=map_llm_params,
     reduce_llm_params=reduce_llm_params,
-    allow_general_knowledge=True,  # set this to True will add instruction to encourage the LLM to incorporate general knowledge in the response, which may increase hallucinations, but could be useful in some use cases.
+    allow_general_knowledge=True,  # set this to True will add instruction to encourage the LLM to incorporate
+    # general knowledge in the response, which may increase hallucinations, but could be useful in some use cases.
     json_mode=False,  # set this to False if your LLM model does not support JSON mode.
     context_builder_params=context_builder_params,
     concurrent_coroutines=8,
-    response_type="multiple paragraphs",  # free form text describing the response type and format, can be anything, e.g. prioritized list, single paragraph, multiple paragraphs, multiple-page report
+    response_type="multiple paragraphs",  # free form text describing the response type and format, can be anything,
+    # e.g. prioritized list, single paragraph, multiple paragraphs, multiple-page report
 )
 
-import asyncio
 
 async def main():
-    result = await search_engine.search("你觉得这篇文档写的怎么样")
+    result = await search_engine.search("D3、C4.5决策树的建模流程.txt，这篇文档写的怎么样")
     print(result.response)
 
+
 # 运行异步函数
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

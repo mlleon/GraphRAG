@@ -1,9 +1,12 @@
 import os
+import asyncio
 from pathlib import Path
 import pandas as pd
 import tiktoken
 from graphrag.config.models.vector_store_schema_config import VectorStoreSchemaConfig
-
+from graphrag.config.enums import ModelType
+from graphrag.config.models.language_model_config import LanguageModelConfig
+from graphrag.language_model.manager import ModelManager
 from graphrag.query.context_builder.entity_extraction import EntityVectorStoreKey
 from graphrag.query.indexer_adapters import (
     read_indexer_covariates,
@@ -13,9 +16,7 @@ from graphrag.query.indexer_adapters import (
     read_indexer_text_units,
 )
 from graphrag.query.question_gen.local_gen import LocalQuestionGen
-from graphrag.query.structured_search.local_search.mixed_context import (
-    LocalSearchMixedContext,
-)
+from graphrag.query.structured_search.local_search.mixed_context import LocalSearchMixedContext
 from graphrag.query.structured_search.local_search.search import LocalSearch
 from graphrag.tokenizer.tiktoken_tokenizer import TiktokenTokenizer
 from graphrag.vector_stores.lancedb import LanceDBVectorStore
@@ -42,7 +43,7 @@ entities = read_indexer_entities(entity_df, community_df, COMMUNITY_LEVEL)
 # 创建向量存储schema配置（使用默认值或根据你的数据调整）
 vector_store_schema_config = VectorStoreSchemaConfig(
     index_name="default-entity-description",
-    vector_size=1536  # 如果默认值不对，只改这个参数
+    vector_size=1536  # 如果默认值不对，只改这个参数 768
 )
 
 # load description embeddings to an in-memory lancedb vectorstore
@@ -85,10 +86,6 @@ text_units = read_indexer_text_units(text_unit_df)
 
 print(f"Text unit records: {len(text_unit_df)}")
 text_unit_df.head()
-
-from graphrag.config.enums import ModelType
-from graphrag.config.models.language_model_config import LanguageModelConfig
-from graphrag.language_model.manager import ModelManager
 
 # api_key = os.environ["GRAPHRAG_API_KEY"]
 # llm_model = os.environ["GRAPHRAG_LLM_MODEL"]
@@ -134,28 +131,28 @@ context_builder = LocalSearchMixedContext(
     entities=entities,
     relationships=relationships,
     # if you did not run covariates during indexing, set this to None
-    covariates=None, # covariates
+    covariates=None,  # covariates
     entity_text_embeddings=description_embedding_store,
-    embedding_vectorstore_key=EntityVectorStoreKey.ID,  # if the vectorstore uses entity title as ids, set this to EntityVectorStoreKey.TITLE
+    embedding_vectorstore_key=EntityVectorStoreKey.ID,
+    # if the vectorstore uses entity title as ids, set this to EntityVectorStoreKey.TITLE
     text_embedder=text_embedder,
     tokenizer=tokenizer,
 )
 
-# Create local search engine 创建本地搜索引擎
-# text_unit_prop: proportion of context window dedicated to related text units
-# community_prop: proportion of context window dedicated to community reports.
-# The remaining proportion is dedicated to entities and relationships. Sum of text_unit_prop and community_prop should be <= 1
+# Create local search engine 创建本地搜索引擎 text_unit_prop: proportion of context window dedicated to related text units
+# community_prop: proportion of context window dedicated to community reports. The remaining proportion is dedicated
+# to entities and relationships. Sum of text_unit_prop and community_prop should be <= 1
 # conversation_history_max_turns: maximum number of turns to include in the conversation history.
 # conversation_history_user_turns_only: if True, only include user queries in the conversation history.
 # top_k_mapped_entities: number of related entities to retrieve from the entity description embedding store.
 # top_k_relationships: control the number of out-of-network relationships to pull into the context window.
-# include_entity_rank: if True, include the entity rank in the entity table in the context window. Default entity rank = node degree.
-# include_relationship_weight: if True, include the relationship weight in the context window.
-# include_community_rank: if True, include the community rank in the context window.
-# return_candidate_context: if True, return a set of dataframes containing all candidate entity/relationship/covariate records that
-# could be relevant. Note that not all of these records will be included in the context window. The "in_context" column in these
-# dataframes indicates whether the record is included in the context window.
-# max_tokens: maximum number of tokens to use for the context window.
+# include_entity_rank: if True, include the entity rank in the entity table in the context window. Default entity
+# rank = node degree. include_relationship_weight: if True, include the relationship weight in the context window.
+# include_community_rank: if True, include the community rank in the context window. return_candidate_context: if
+# True, return a set of dataframes containing all candidate entity/relationship/covariate records that could be
+# relevant. Note that not all of these records will be included in the context window. The "in_context" column in
+# these dataframes indicates whether the record is included in the context window. max_tokens: maximum number of
+# tokens to use for the context window.
 
 
 local_context_params = {
@@ -169,12 +166,17 @@ local_context_params = {
     "include_relationship_weight": True,
     "include_community_rank": False,
     "return_candidate_context": False,
-    "embedding_vectorstore_key": EntityVectorStoreKey.ID,  # set this to EntityVectorStoreKey.TITLE if the vectorstore uses entity title as ids
-    "max_tokens": 12_000,  # change this based on the token limit you have on your model (if you are using a model with 8k limit, a good setting could be 5000)
+    "embedding_vectorstore_key": EntityVectorStoreKey.ID,
+    # set this to EntityVectorStoreKey.TITLE if the vectorstore uses entity title as ids
+    "max_tokens": 12_000,
+    # change this based on the token limit you have on your model (if you are using a model with 8k limit,
+    # a good setting could be 5000)
 }
 
 model_params = {
-    "max_tokens": 2_000,  # change this based on the token limit you have on your model (if you are using a model with 8k limit, a good setting could be 1000=1500)
+    "max_tokens": 2_000,
+    # change this based on the token limit you have on your model (if you are using a model with 8k limit,
+    # a good setting could be 1000=1500)
     "temperature": 0.0,
 }
 
@@ -184,14 +186,17 @@ search_engine = LocalSearch(
     tokenizer=tokenizer,
     model_params=model_params,
     context_builder_params=local_context_params,
-    response_type="multiple paragraphs",  # free form text describing the response type and format, can be anything, e.g. prioritized list, single paragraph, multiple paragraphs, multiple-page report
+    response_type="multiple paragraphs",
+    # free form text describing the response type and format, can be anything, e.g. prioritized list,
+    # single paragraph, multiple paragraphs, multiple-page report
 )
 
-import asyncio
 
 async def main():
     result = await search_engine.search("这篇文档写的怎么样")
     print(result.response)
 
-# 运行异步函数
-asyncio.run(main())
+
+if __name__ == "__main__":
+    # 运行异步函数
+    asyncio.run(main())
