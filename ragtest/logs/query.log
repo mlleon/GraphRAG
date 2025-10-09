@@ -1,0 +1,10 @@
+2025-10-09 01:00:33.0977 - DEBUG - graphrag.api.query - Executing global search query: 文档中介绍了几种算法
+2025-10-09 01:09:21.0885 - DEBUG - graphrag.api.query - Executing global search query: 这篇文档写的怎么样
+2025-10-09 01:09:28.0060 - WARNING - graphrag.query.structured_search.global_search.search - Warning: All map responses have score 0 (i.e., no relevant information found from the dataset), returning a canned 'I do not know' answer. You can try enabling `allow_general_knowledge` to encourage the LLM to incorporate relevant general knowledge, at the risk of increasing hallucinations.
+2025-10-09 01:10:32.0777 - DEBUG - graphrag.api.query - Executing global search query: 这篇文档写的怎么样
+2025-10-09 01:10:44.0023 - WARNING - graphrag.query.structured_search.global_search.search - Warning: All map responses have score 0 (i.e., no relevant information found from the dataset), returning a canned 'I do not know' answer. You can try enabling `allow_general_knowledge` to encourage the LLM to incorporate relevant general knowledge, at the risk of increasing hallucinations.
+2025-10-09 01:24:42.0215 - DEBUG - graphrag.api.query - Executing local search query: 这篇文档写的怎么样
+2025-10-09 01:26:20.0714 - DEBUG - graphrag.api.query - Executing local search query: 这篇文档写的怎么样
+2025-10-09 01:30:08.0810 - DEBUG - graphrag.api.query - Executing local search query: 这篇文档写的怎么样
+2025-10-09 01:31:20.0375 - DEBUG - graphrag.api.query - Executing local search query: 这篇文档写的怎么样
+2025-10-09 01:36:44.0755 - DEBUG - graphrag.api.query - Executing local search query: 这篇文档写的怎么样

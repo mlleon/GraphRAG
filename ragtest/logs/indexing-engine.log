@@ -1,0 +1,131 @@
+2025-10-08 22:07:54.0504 - INFO - graphrag.api.index - Initializing indexing pipeline...
+2025-10-08 22:07:54.0504 - INFO - graphrag.index.workflows.factory - Creating pipeline with workflows: ['load_input_documents', 'create_base_text_units', 'create_final_documents', 'extract_graph', 'finalize_graph', 'extract_covariates', 'create_communities', 'create_final_text_units', 'create_community_reports', 'generate_text_embeddings']
+2025-10-08 22:07:54.0504 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at E:\gitlocal\GraphRAG\ragtest\input
+2025-10-08 22:07:54.0505 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at E:\gitlocal\GraphRAG\ragtest\output
+2025-10-08 22:07:54.0505 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at E:\gitlocal\GraphRAG\ragtest
+2025-10-08 22:07:54.0506 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at E:\gitlocal\GraphRAG\ragtest\cache
+2025-10-08 22:07:54.0517 - INFO - graphrag.index.run.run_pipeline - Running standard indexing.
+2025-10-08 22:07:54.0517 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at 
+2025-10-08 22:07:54.0522 - INFO - graphrag.index.run.run_pipeline - Executing pipeline...
+2025-10-08 22:07:54.0522 - INFO - graphrag.index.input.factory - loading input from root_dir=E:\gitlocal\GraphRAG\ragtest\input
+2025-10-08 22:07:54.0522 - INFO - graphrag.index.input.factory - Loading Input InputFileType.text
+2025-10-08 22:07:54.0523 - INFO - graphrag.storage.file_pipeline_storage - search E:\gitlocal\GraphRAG\ragtest\input for files matching .*\.txt$
+2025-10-08 22:07:54.0564 - INFO - graphrag.index.input.util - Found 1 InputFileType.text files, loading 1
+2025-10-08 22:07:54.0566 - INFO - graphrag.index.input.util - Total number of unfiltered InputFileType.text rows: 1
+2025-10-08 22:07:54.0566 - INFO - graphrag.index.workflows.load_input_documents - Final # of rows loaded: 1
+2025-10-08 22:07:54.0682 - INFO - graphrag.api.index - Workflow load_input_documents completed successfully
+2025-10-08 22:07:54.0698 - INFO - graphrag.index.workflows.create_base_text_units - Workflow started: create_base_text_units
+2025-10-08 22:07:54.0699 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2025-10-08 22:07:54.0780 - INFO - graphrag.index.workflows.create_base_text_units - Starting chunking process for 1 documents
+2025-10-08 22:07:54.0791 - INFO - graphrag.index.workflows.create_base_text_units - chunker progress:  1/1
+2025-10-08 22:07:54.0810 - INFO - graphrag.index.workflows.create_base_text_units - Workflow completed: create_base_text_units
+2025-10-08 22:07:54.0810 - INFO - graphrag.api.index - Workflow create_base_text_units completed successfully
+2025-10-08 22:07:54.0814 - INFO - graphrag.index.workflows.create_final_documents - Workflow started: create_final_documents
+2025-10-08 22:07:54.0815 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2025-10-08 22:07:54.0818 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-10-08 22:07:54.0838 - INFO - graphrag.index.workflows.create_final_documents - Workflow completed: create_final_documents
+2025-10-08 22:07:54.0838 - INFO - graphrag.api.index - Workflow create_final_documents completed successfully
+2025-10-08 22:07:54.0845 - INFO - graphrag.index.workflows.extract_graph - Workflow started: extract_graph
+2025-10-08 22:07:54.0845 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-10-08 22:07:54.0898 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at E:\gitlocal\GraphRAG\ragtest\cache\extract_graph
+2025-10-08 22:12:07.0644 - INFO - graphrag.logger.progress - extract graph progress: 1/4
+2025-10-08 22:13:17.0462 - INFO - graphrag.logger.progress - extract graph progress: 2/4
+2025-10-08 22:14:06.0755 - INFO - graphrag.logger.progress - extract graph progress: 3/4
+2025-10-08 22:15:12.0466 - INFO - graphrag.logger.progress - extract graph progress: 4/4
+2025-10-08 22:15:13.0025 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at E:\gitlocal\GraphRAG\ragtest\cache\summarize_descriptions
+2025-10-08 22:15:13.0672 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 1/41
+2025-10-08 22:15:13.0672 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 2/41
+2025-10-08 22:15:13.0672 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 3/41
+2025-10-08 22:15:13.0673 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 4/41
+2025-10-08 22:15:13.0673 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 5/41
+2025-10-08 22:15:13.0673 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 6/41
+2025-10-08 22:15:13.0673 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 7/41
+2025-10-08 22:15:13.0674 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 8/41
+2025-10-08 22:15:13.0674 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 9/41
+2025-10-08 22:15:13.0674 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 10/41
+2025-10-08 22:15:13.0674 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 11/41
+2025-10-08 22:20:13.0711 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 12/41
+2025-10-08 22:21:13.0717 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 13/41
+2025-10-08 22:22:13.0705 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 14/41
+2025-10-08 22:23:13.0720 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 15/41
+2025-10-08 22:24:13.0726 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 16/41
+2025-10-08 22:24:13.0728 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 17/41
+2025-10-08 22:24:13.0729 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 18/41
+2025-10-08 22:24:13.0729 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 19/41
+2025-10-08 22:24:13.0730 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 20/41
+2025-10-08 22:24:13.0730 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 21/41
+2025-10-08 22:24:13.0730 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 22/41
+2025-10-08 22:24:13.0730 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 23/41
+2025-10-08 22:24:13.0730 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 24/41
+2025-10-08 22:24:13.0730 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 25/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 26/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 27/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 28/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 29/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 30/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 31/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 32/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 33/41
+2025-10-08 22:24:13.0731 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 34/41
+2025-10-08 22:24:13.0732 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 35/41
+2025-10-08 22:24:13.0732 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 36/41
+2025-10-08 22:24:13.0732 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 37/41
+2025-10-08 22:29:13.0769 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 38/41
+2025-10-08 22:30:13.0779 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 39/41
+2025-10-08 22:31:13.0782 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 40/41
+2025-10-08 22:32:13.0775 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 41/41
+2025-10-08 22:32:13.0796 - INFO - graphrag.index.workflows.extract_graph - Workflow completed: extract_graph
+2025-10-08 22:32:13.0796 - INFO - graphrag.api.index - Workflow extract_graph completed successfully
+2025-10-08 22:32:13.0809 - INFO - graphrag.index.workflows.finalize_graph - Workflow started: finalize_graph
+2025-10-08 22:32:13.0809 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-10-08 22:32:13.0814 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-10-08 22:32:13.0904 - INFO - graphrag.index.workflows.finalize_graph - Workflow completed: finalize_graph
+2025-10-08 22:32:13.0904 - INFO - graphrag.api.index - Workflow finalize_graph completed successfully
+2025-10-08 22:32:13.0918 - INFO - graphrag.index.workflows.extract_covariates - Workflow started: extract_covariates
+2025-10-08 22:32:13.0918 - INFO - graphrag.index.workflows.extract_covariates - Workflow completed: extract_covariates
+2025-10-08 22:32:13.0918 - INFO - graphrag.api.index - Workflow extract_covariates completed successfully
+2025-10-08 22:32:13.0918 - INFO - graphrag.index.workflows.create_communities - Workflow started: create_communities
+2025-10-08 22:32:13.0919 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-10-08 22:32:13.0922 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-10-08 22:32:13.0963 - INFO - graphrag.index.workflows.create_communities - Workflow completed: create_communities
+2025-10-08 22:32:13.0963 - INFO - graphrag.api.index - Workflow create_communities completed successfully
+2025-10-08 22:32:13.0972 - INFO - graphrag.index.workflows.create_final_text_units - Workflow started: create_final_text_units
+2025-10-08 22:32:13.0972 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-10-08 22:32:13.0976 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-10-08 22:32:13.0979 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-10-08 22:32:14.0003 - INFO - graphrag.index.workflows.create_final_text_units - Workflow completed: create_final_text_units
+2025-10-08 22:32:14.0003 - INFO - graphrag.api.index - Workflow create_final_text_units completed successfully
+2025-10-08 22:32:14.0010 - INFO - graphrag.index.workflows.create_community_reports - Workflow started: create_community_reports
+2025-10-08 22:32:14.0010 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-10-08 22:32:14.0013 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-10-08 22:32:14.0016 - INFO - graphrag.utils.storage - reading table from storage: communities.parquet
+2025-10-08 22:32:14.0066 - INFO - graphrag.index.operations.summarize_communities.graph_context.context_builder - Number of nodes at level=0 => 14
+2025-10-08 22:32:14.0154 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at E:\gitlocal\GraphRAG\ragtest\cache\community_reporting
+2025-10-08 22:36:14.0827 - INFO - graphrag.logger.progress - level 0 summarize communities progress: 1/4
+2025-10-08 22:37:14.0827 - INFO - graphrag.logger.progress - level 0 summarize communities progress: 2/4
+2025-10-08 22:38:14.0829 - INFO - graphrag.logger.progress - level 0 summarize communities progress: 3/4
+2025-10-08 22:39:14.0841 - INFO - graphrag.logger.progress - level 0 summarize communities progress: 4/4
+2025-10-08 22:39:14.0851 - INFO - graphrag.index.workflows.create_community_reports - Workflow completed: create_community_reports
+2025-10-08 22:39:14.0851 - INFO - graphrag.api.index - Workflow create_community_reports completed successfully
+2025-10-08 22:39:14.0864 - INFO - graphrag.index.workflows.generate_text_embeddings - Workflow started: generate_text_embeddings
+2025-10-08 22:39:14.0864 - INFO - graphrag.index.workflows.generate_text_embeddings - Embedding the following fields: ['entity.description', 'community.full_content', 'text_unit.text']
+2025-10-08 22:39:14.0865 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-10-08 22:39:14.0868 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-10-08 22:39:14.0872 - INFO - graphrag.utils.storage - reading table from storage: community_reports.parquet
+2025-10-08 22:39:14.0879 - INFO - graphrag.index.workflows.generate_text_embeddings - Creating embeddings
+2025-10-08 22:39:14.0879 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding entity.description: default-entity-description
+2025-10-08 22:39:14.0948 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-10-08 22:39:14.0948 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at E:\gitlocal\GraphRAG\ragtest\cache\text_embedding
+2025-10-08 22:39:15.0597 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 14 inputs via 14 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-10-08 22:39:17.0453 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-10-08 22:39:17.0985 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding community.full_content: default-community-full_content
+2025-10-08 22:39:17.0987 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-10-08 22:39:17.0991 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 4 inputs via 4 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-10-08 22:39:18.0606 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-10-08 22:39:18.0641 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding text_unit.text: default-text_unit-text
+2025-10-08 22:39:18.0643 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-10-08 22:39:18.0647 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 4 inputs via 4 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-10-08 22:39:19.0774 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-10-08 22:39:19.0803 - INFO - graphrag.index.workflows.generate_text_embeddings - Workflow completed: generate_text_embeddings
+2025-10-08 22:39:19.0803 - INFO - graphrag.api.index - Workflow generate_text_embeddings completed successfully
+2025-10-08 22:39:19.0825 - INFO - graphrag.index.run.run_pipeline - Indexing pipeline complete.
